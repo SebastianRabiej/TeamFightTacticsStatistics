@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 @Slf4j
 @Component
@@ -25,36 +25,37 @@ public class DataProvider {
     @Value("classpath:json/items.json")
     private Resource itemsResource;
 
-    File getOrigins(){
+    InputStream getOrigins(){
         try {
-            return originsResource.getFile();
+            return originsResource.getInputStream();
         } catch (IOException e) {
             log.error("Resource failed to open. Name: " +originsResource.getFilename());
         }
+        log.error("No file " + originsResource);
         return null;
     }
 
-    File getClasses(){
+    InputStream getClasses(){
         try {
-            return classesResource.getFile();
+            return classesResource.getInputStream();
         } catch (IOException e) {
             log.error("Resource failed to open. Name: " +classesResource.getFilename());
         }
         return null;
     }
 
-    File getChampions(){
+    InputStream getChampions(){
         try {
-            return championsResource.getFile();
+            return championsResource.getInputStream();
         } catch (IOException e) {
             log.error("Resource failed to open. Name: " +championsResource.getFilename());
         }
         return null;
     }
 
-    File getItems(){
+    InputStream getItems(){
         try {
-            return itemsResource.getFile();
+            return itemsResource.getInputStream();
         } catch (IOException e) {
             log.error("Resource failed to open. Name: " +itemsResource.getFilename());
         }
